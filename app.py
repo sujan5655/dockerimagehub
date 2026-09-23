@@ -7,5 +7,20 @@ def home():
   return "Hello World!"
 
 
+@app.route("/about")
+def about():
+  return "This is the about page"
+
+@app.route("/health")
+def health():
+  return "Application is healthy"
+
+@app.route("/api/message")
+def message():
+  return {
+    "message":"Hello from the Flask API",
+    "status":"success"
+  }
+
 if __name__=="__main__":
   app.run(host="0.0.0.0",port=5000)
