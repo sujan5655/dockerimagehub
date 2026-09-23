@@ -19,7 +19,8 @@ jobs:
         python-version: "3.9"
 
       - name: Install dependencies
-        run: python -m pip install --upgrade pip
+        run: |
+          python -m pip install --upgrade pip
           pip install Flask
           pip install pytest
 
@@ -45,11 +46,12 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build and push Docker image
+        id: docker-build
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/flask-app:latest
 
-      - name: Images digest
+      - name: Image digest
         run: echo ${{steps.build-and-publish.outputs.digest}}
